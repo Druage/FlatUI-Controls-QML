@@ -61,7 +61,7 @@ Rectangle {
 
         onSetTimerChanged: {
             if (setTimer)
-                overlayTimer.start();
+                overlayTimer.restart();
             else
                 overlayTimer.stop();
         }
