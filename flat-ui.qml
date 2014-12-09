@@ -4,7 +4,7 @@ import QtGraphicalEffects 1.0
 Rectangle {
     id: root;
     width: 900;
-    height: 500;
+    height: 700;
 
     Constants {
         id: constants;
@@ -81,6 +81,25 @@ Rectangle {
             Input {
                 text: "Disabled";
                 disabled: true;
+            }
+        }
+
+        Row {
+            spacing: 24;
+
+            Text {
+                color: constants.wetAsphalt;
+                text: "Dropdown";
+                font {
+                    pointSize: 15;
+                }
+            }
+        }
+
+        Row {
+            spacing: 24;
+            Dropdown {
+                width: 100;
             }
         }
 
