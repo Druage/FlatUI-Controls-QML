@@ -5,6 +5,10 @@ PrimaryButton {
     id: dropDown;
     text: "Default";
 
+    Constants {
+        id: constants;
+    }
+
     property string dropdownColor: "#f3f4f5";
     property string highlightColor: "#dee1e2";
     property string dropdownTextColor: "#606d7a";
@@ -56,14 +60,17 @@ PrimaryButton {
             id: listView;
             anchors.fill: parent;
             highlightFollowsCurrentItem: true;
+            property string highlightColor: dropDown.highlightColor;
             highlight: Rectangle {
                 width: listView.currentItem.width;
                 height: listView.currentItem.height;
-                color: dropDown.highlightColor;
+                color: listView.highlightColor;
                 radius: (listView.currentIndex !== listView.count-1 && listView.currentIndex !== 0) ? 0 : dropDown.dropdownRadius;
             }
 
             model: dropDown.model;
+            property bool itemChecked: false;
+
             delegate: Item {
                 width: listView.width;
                 height: dropDown.dropdownItemHeight;
@@ -89,7 +96,22 @@ PrimaryButton {
 
                     MouseArea {
                         anchors.fill: parent;
-                        hoverEnabled: true;
+                        hoverEnabled: !listView.itemChecked;
+                        onClicked: {
+                            if (dropDown.enableScrollView) {
+                                if (listView.itemChecked) {
+                                    listView.itemChecked = false;
+                                    listView.highlightColor = dropDown.highlightColor;
+                                }
+                                else {
+                                    listView.itemChecked = true;
+                                    listView.highlightColor = constants.secondary;
+                                }
+                            }
+
+                        }
+
+
                         onEntered: {
                             listView.currentIndex = index;
                         }
