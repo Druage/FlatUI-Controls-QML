@@ -5,6 +5,24 @@ PrimaryButton {
     id: dropDown;
     text: "Default";
 
+    Image {
+        anchors {
+            right: parent.right;
+            rightMargin: 12;
+            verticalCenter: parent.verticalCenter;
+        }
+
+        source: "src/arrow-down-b.png";
+
+        height: 20;
+        width: 20;
+        sourceSize {
+            height: parent.height;
+            width: parent.width;
+        }
+        fillMode: Image.PreserveAspectFit;
+    }
+
     Constants {
         id: constants;
     }
