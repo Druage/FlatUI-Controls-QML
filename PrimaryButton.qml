@@ -8,6 +8,7 @@ Rectangle {
     radius: 4;
 
     property alias flatColors: constants;
+    property alias mouseField: mouseArea;
 
     Constants {
         id: constants;
@@ -16,6 +17,14 @@ Rectangle {
     MouseArea {
         id: mouseArea;
         anchors.fill: parent;
+        property bool clickedButton: false;
+
+        onClicked: {
+            if (clickedButton)
+                clickedButton = false;
+            else
+                clickedButton = true;
+        }
 
         onPressed: {
             primaryButton.color = root.pressColor;
