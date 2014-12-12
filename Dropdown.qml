@@ -71,9 +71,14 @@ PrimaryButton {
             model: dropDown.model;
             property bool itemChecked: false;
 
+            Component.onCompleted: dropDown.text = currentItem.currentText;
+
+
             delegate: Item {
                 width: listView.width;
                 height: dropDown.dropdownItemHeight;
+                property string currentText: item;
+
                 Rectangle {
                     id: separation;
                     color: dropDown.highlightColor;
@@ -98,6 +103,7 @@ PrimaryButton {
                         anchors.fill: parent;
                         hoverEnabled: !listView.itemChecked;
                         onClicked: {
+                            dropDown.text = item;
                             if (dropDown.enableScrollView) {
                                 if (listView.itemChecked) {
                                     listView.itemChecked = false;
@@ -108,6 +114,8 @@ PrimaryButton {
                                     listView.highlightColor = constants.secondary;
                                 }
                             }
+                            dropDown.mouseField.clickedButton = false;
+
 
                         }
 
