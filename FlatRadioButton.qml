@@ -12,9 +12,6 @@ RadioButton {
     property string textColor: "black";
     property int spacing: 12;
     property bool disabled: false;
-    onCheckedChanged: {
-        console.log(checked);
-    }
 
     style: RadioButtonStyle {
         spacing: control.spacing;
