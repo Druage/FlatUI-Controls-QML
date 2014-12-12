@@ -98,9 +98,11 @@ Rectangle {
 
         Row {
             spacing: 24;
+
             Dropdown {
-                width: 100;
+                width: 400;
             }
+
         }
 
         Text {
@@ -116,6 +118,38 @@ Rectangle {
 
             }
         }
+
+        Text {
+            color: constants.wetAsphalt;
+            text: "Radio Buttons";
+            font {
+                pointSize: 15;
+            }
+        }
+
+        Row {
+            spacing: 48;
+
+            Column {
+                spacing: 12;
+
+                FlatRadioButton {
+
+                }
+                FlatRadioButton {
+
+                }
+                FlatRadioButton {
+
+                }
+                FlatRadioButton {
+
+                }
+
+            }
+        }
+
+
     }
 }
 
