@@ -1,4 +1,5 @@
 import QtQuick 2.3
+import QtQuick.Controls 1.2
 
 PrimaryButton {
     id: dropDown;
@@ -8,8 +9,11 @@ PrimaryButton {
     property string highlightColor: "#dee1e2";
     property string dropdownTextColor: "#606d7a";
     property int dropdownItemHeight: 40;
-    property int dropdownWidth: 250;
+    property int dropdownWidth: width + 100;
     property int dropdownRadius: 4;
+    property bool enableScrollView: false;
+    property int scrollViewHeight: 0;
+    property int scrollViewWidth: 0;
 
     property var model: ListModel {
         ListElement {item: "Apple";}
@@ -22,19 +26,32 @@ PrimaryButton {
 
     Component.onCompleted: parent.z = 100;
 
+    ScrollView {
+        id: scrollView;
+        anchors {
+            top: visible ? dropDown.bottom : undefined;
+            topMargin: 10;
+        }
+        height: dropDown.scrollViewHeight == 0 ? dropDown.dropdownItemHeight * listView.count : dropDown.scrollViewHeight;
+        width: dropDown.scrollViewWidth == 0 ? dropDown.dropdownWidth : dropDown.scrollViewWidth;
+        visible: dropDown.mouseField.clickedButton;
+        contentItem: parent.enableScrollView ? dropdownBackground : null;
+    }
+
     Rectangle {
         id: dropdownBackground;
         z: 100;
         radius: dropDown.dropdownRadius;
         visible: dropDown.mouseField.clickedButton;
-        x: parent.x;
         height: dropDown.dropdownItemHeight * listView.count;
         width: dropDown.dropdownWidth;
         color: dropDown.dropdownColor;
+
         anchors {
-            top: dropDown.bottom;
+            top: scrollView.contentItem === null ? dropDown.bottom : undefined;
             topMargin: 10;
         }
+
         ListView {
             id: listView;
             anchors.fill: parent;
